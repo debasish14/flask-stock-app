@@ -1,0 +1,55 @@
+<!-- templates/bill.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Transaction Bill</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title text-center">STOCK BROKER RECEIPT</h1>
+                <hr>
+                
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong>Date and Time:</strong> {{ bill.timestamp }}</p>
+                        <p><strong>Client ID:</strong> {{ bill.client_id }}</p>
+                        <p><strong>Client Name:</strong> {{ bill.client_name }}</p>
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong>Stock Name:</strong> {{ bill.stock_name }}</p>
+                        <p><strong>Stock Quantity:</strong> {{ bill.stock_quantity }}</p>
+                        <p><strong>Stock Price per Unit:</strong> ₹{{ "%.2f"|format(bill.stock_price) }}</p>
+                        <p><strong>Total Stock Value:</strong> ₹{{ "%.2f"|format(bill.total_stock_value) }}</p>
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <h4>Brokerage Details</h4>
+                <p><strong>Fixed Brokerage Fee:</strong> ₹{{ "%.2f"|format(bill.brokerage) }}</p>
+                <p><strong>Total Amount {{ "Payable" if bill.transaction_type == "Purchase" else "Receivable" }}:</strong> 
+                   ₹{{ "%.2f"|format(bill.total_with_brokerage) }}</p>
+                
+                <hr>
+                
+                <h4>Acknowledgment</h4>
+                <p>This receipt serves as proof of transaction.</p>
+                <p>Please retain this document for future reference.</p>
+                
+                <div class="text-center mt-4">
+                    <p>Thank you for choosing our brokerage service!</p>
+                    <a href="/" class="btn btn-primary">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
